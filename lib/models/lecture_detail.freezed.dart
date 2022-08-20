@@ -36,8 +36,8 @@ mixin _$LectureDetail {
   String get instructorPhoto => throw _privateConstructorUsedError;
   String get instructorName => throw _privateConstructorUsedError;
   String get instructorPhone => throw _privateConstructorUsedError;
-  String get userMoney => throw _privateConstructorUsedError;
   String get userId => throw _privateConstructorUsedError;
+  String get userMoney => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -67,8 +67,8 @@ abstract class $LectureDetailCopyWith<$Res> {
       String instructorPhoto,
       String instructorName,
       String instructorPhone,
-      String userMoney,
-      String userId});
+      String userId,
+      String userMoney});
 }
 
 /// @nodoc
@@ -98,8 +98,8 @@ class _$LectureDetailCopyWithImpl<$Res>
     Object? instructorPhoto = freezed,
     Object? instructorName = freezed,
     Object? instructorPhone = freezed,
-    Object? userMoney = freezed,
     Object? userId = freezed,
+    Object? userMoney = freezed,
   }) {
     return _then(_value.copyWith(
       classId: classId == freezed
@@ -166,13 +166,13 @@ class _$LectureDetailCopyWithImpl<$Res>
           ? _value.instructorPhone
           : instructorPhone // ignore: cast_nullable_to_non_nullable
               as String,
-      userMoney: userMoney == freezed
-          ? _value.userMoney
-          : userMoney // ignore: cast_nullable_to_non_nullable
-              as String,
       userId: userId == freezed
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      userMoney: userMoney == freezed
+          ? _value.userMoney
+          : userMoney // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -202,8 +202,8 @@ abstract class _$$_LectureDetailCopyWith<$Res>
       String instructorPhoto,
       String instructorName,
       String instructorPhone,
-      String userMoney,
-      String userId});
+      String userId,
+      String userMoney});
 }
 
 /// @nodoc
@@ -235,8 +235,8 @@ class __$$_LectureDetailCopyWithImpl<$Res>
     Object? instructorPhoto = freezed,
     Object? instructorName = freezed,
     Object? instructorPhone = freezed,
-    Object? userMoney = freezed,
     Object? userId = freezed,
+    Object? userMoney = freezed,
   }) {
     return _then(_$_LectureDetail(
       classId: classId == freezed
@@ -303,13 +303,13 @@ class __$$_LectureDetailCopyWithImpl<$Res>
           ? _value.instructorPhone
           : instructorPhone // ignore: cast_nullable_to_non_nullable
               as String,
-      userMoney: userMoney == freezed
-          ? _value.userMoney
-          : userMoney // ignore: cast_nullable_to_non_nullable
-              as String,
       userId: userId == freezed
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      userMoney: userMoney == freezed
+          ? _value.userMoney
+          : userMoney // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -335,8 +335,8 @@ class _$_LectureDetail implements _LectureDetail {
       required this.instructorPhoto,
       required this.instructorName,
       required this.instructorPhone,
-      required this.userMoney,
-      required this.userId})
+      required this.userId,
+      required this.userMoney})
       : _photos = photos;
 
   factory _$_LectureDetail.fromJson(Map<String, dynamic> json) =>
@@ -384,13 +384,13 @@ class _$_LectureDetail implements _LectureDetail {
   @override
   final String instructorPhone;
   @override
-  final String userMoney;
-  @override
   final String userId;
+  @override
+  final String userMoney;
 
   @override
   String toString() {
-    return 'LectureDetail(classId: $classId, photos: $photos, time: $time, title: $title, description: $description, location: $location, level: $level, price: $price, like: $like, totalCount: $totalCount, category: $category, status: $status, instructorId: $instructorId, instructorPhoto: $instructorPhoto, instructorName: $instructorName, instructorPhone: $instructorPhone, userMoney: $userMoney, userId: $userId)';
+    return 'LectureDetail(classId: $classId, photos: $photos, time: $time, title: $title, description: $description, location: $location, level: $level, price: $price, like: $like, totalCount: $totalCount, category: $category, status: $status, instructorId: $instructorId, instructorPhoto: $instructorPhoto, instructorName: $instructorName, instructorPhone: $instructorPhone, userId: $userId, userMoney: $userMoney)';
   }
 
   @override
@@ -420,8 +420,8 @@ class _$_LectureDetail implements _LectureDetail {
                 .equals(other.instructorName, instructorName) &&
             const DeepCollectionEquality()
                 .equals(other.instructorPhone, instructorPhone) &&
-            const DeepCollectionEquality().equals(other.userMoney, userMoney) &&
-            const DeepCollectionEquality().equals(other.userId, userId));
+            const DeepCollectionEquality().equals(other.userId, userId) &&
+            const DeepCollectionEquality().equals(other.userMoney, userMoney));
   }
 
   @JsonKey(ignore: true)
@@ -444,8 +444,8 @@ class _$_LectureDetail implements _LectureDetail {
       const DeepCollectionEquality().hash(instructorPhoto),
       const DeepCollectionEquality().hash(instructorName),
       const DeepCollectionEquality().hash(instructorPhone),
-      const DeepCollectionEquality().hash(userMoney),
-      const DeepCollectionEquality().hash(userId));
+      const DeepCollectionEquality().hash(userId),
+      const DeepCollectionEquality().hash(userMoney));
 
   @JsonKey(ignore: true)
   @override
@@ -478,8 +478,8 @@ abstract class _LectureDetail implements LectureDetail {
       required final String instructorPhoto,
       required final String instructorName,
       required final String instructorPhone,
-      required final String userMoney,
-      required final String userId}) = _$_LectureDetail;
+      required final String userId,
+      required final String userMoney}) = _$_LectureDetail;
 
   factory _LectureDetail.fromJson(Map<String, dynamic> json) =
       _$_LectureDetail.fromJson;
@@ -517,9 +517,9 @@ abstract class _LectureDetail implements LectureDetail {
   @override
   String get instructorPhone;
   @override
-  String get userMoney;
-  @override
   String get userId;
+  @override
+  String get userMoney;
   @override
   @JsonKey(ignore: true)
   _$$_LectureDetailCopyWith<_$_LectureDetail> get copyWith =>

@@ -25,8 +25,8 @@ _$_LectureDetail _$$_LectureDetailFromJson(Map<String, dynamic> json) =>
       instructorPhoto: json['instructorPhoto'] as String,
       instructorName: json['instructorName'] as String,
       instructorPhone: json['instructorPhone'] as String,
-      userMoney: json['userMoney'] as String,
       userId: json['userId'] as String,
+      userMoney: json['userMoney'] as String,
     );
 
 Map<String, dynamic> _$$_LectureDetailToJson(_$_LectureDetail instance) =>
@@ -47,6 +47,6 @@ Map<String, dynamic> _$$_LectureDetailToJson(_$_LectureDetail instance) =>
       'instructorPhoto': instance.instructorPhoto,
       'instructorName': instance.instructorName,
       'instructorPhone': instance.instructorPhone,
-      'userMoney': instance.userMoney,
       'userId': instance.userId,
+      'userMoney': instance.userMoney,
     };

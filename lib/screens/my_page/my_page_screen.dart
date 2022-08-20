@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../../dummy_data.dart';
 import '../../providers/lecture_details.dart';
 import '../../widgets/appbar.dart';
+import 'register_list_screen.dart';
 
 class MyPageScreen extends StatelessWidget {
   static const routeName = '/my-page';
@@ -63,7 +64,7 @@ class MyPageScreen extends StatelessWidget {
                       _buildIconButton(Icons.receipt_sharp, '방 개설\n목록', context,
                           LikeListScreen.routeName),
                       _buildIconButton(Icons.shopping_bag, '방 신청 \n목록', context,
-                          LikeListScreen.routeName),
+                          RegisterListScreen.routeName),
                       _buildIconButton(Icons.favorite, '찜하기\n', context,
                           LikeListScreen.routeName),
                     ],

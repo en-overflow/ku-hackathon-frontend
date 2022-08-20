@@ -8,6 +8,7 @@ import 'package:demo_app/screens/detail_screen.dart';
 import 'package:demo_app/screens/home_screen.dart';
 import 'package:demo_app/screens/my_page/like_list_screen.dart';
 import 'package:demo_app/screens/my_page/my_page_screen.dart';
+import 'package:demo_app/screens/my_page/register_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -56,6 +57,7 @@ class MyApp extends StatelessWidget {
           ClassListSearchScreen.routeName: (ctx) => ClassListSearchScreen(),
           ClassAddScreen.routeName: (ctx) => ClassAddScreen(),
           MyPageScreen.routeName: (ctx) => MyPageScreen(),
+          RegisterListScreen.routeName: (ctx) => RegisterListScreen(),
           LikeListScreen.routeName: (ctx) => LikeListScreen(),
           DetailScreen.routeName: (ctx) => DetailScreen(),
         },

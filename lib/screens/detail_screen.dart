@@ -30,11 +30,11 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
-  Future<Class>? c;
+  Future<LectureDetail>? futureLectureDetail;
   @override
   void initState() {
     super.initState();
-    c = fetchClass();
+    futureLectureDetail = fetchClass();
   }
 
   @override
@@ -48,32 +48,48 @@ class _DetailScreenState extends State<DetailScreen> {
 
     return Scaffold(
       appBar: appBarDetail(context),
-      body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        color: Colors.white,
-        padding: EdgeInsets.only(
-          top: 5,
-          bottom: 10,
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(
-                height: 200,
-                child: _buildsliderWidget(
-                  context,
-                  selectedLecture.photos,
-                ),
-              ),
-              contentDetail(context, selectedLecture),
-            ],
-          ),
-        ),
-      ),
+      // body: FutureBuilder<LectureDetail>(
+      //   future: futureLectureDetail,
+      //   builder: (context, snapshot) {
+      //     if (snapshot.hasData) {
+      //       // return buildBody(context, snapshot);
+      //
+      //     } else if (snapshot.hasError) {
+      //       return Text("${snapshot.error}에러!!");
+      //     }
+      //     return CircularProgressIndicator();
+      //   },
+      // ),
+      body: buildBody(context, selectedLecture),
       bottomNavigationBar: _bottomBarWidget(context, selectedLecture),
     );
   }
+}
+
+Container buildBody(BuildContext context, LectureDetail selectedLecture) {
+  return Container(
+    height: double.infinity,
+    width: double.infinity,
+    color: Colors.white,
+    padding: EdgeInsets.only(
+      top: 5,
+      bottom: 10,
+    ),
+    child: SingleChildScrollView(
+      child: Column(
+        children: [
+          SizedBox(
+            height: 200,
+            child: _buildsliderWidget(
+              context,
+              selectedLecture.photos,
+            ),
+          ),
+          contentDetail(context, selectedLecture),
+        ],
+      ),
+    ),
+  );
 }
 
 Widget _buildsliderWidget(BuildContext context, List<String> imagePath) {
