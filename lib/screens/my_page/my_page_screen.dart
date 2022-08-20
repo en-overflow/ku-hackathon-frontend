@@ -1,144 +1,186 @@
+import 'dart:convert';
+
+import 'package:demo_app/models/user.dart';
 import 'package:demo_app/screens/my_page/like_list_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
 
-import '../../dummy_data.dart';
 import '../../providers/lecture_details.dart';
 import '../../widgets/appbar.dart';
 import 'register_list_screen.dart';
 
-class MyPageScreen extends StatelessWidget {
+Future<User> fetchUser() async {
+  final url = Uri.parse('https://jsonplaceholder.typicode.com/todos/1');
+  var response = await http.get(url);
+
+  if (response.statusCode == 200) {
+    //ok
+    print(json.decode(response.body));
+    return User.fromJson(json.decode(response.body));
+  } else {
+    throw Exception('실패ㅠㅠ');
+  }
+}
+
+class MyPageScreen extends StatefulWidget {
   static const routeName = '/my-page';
-  final user = DUMMY_USER[0];
+
+  @override
+  State<MyPageScreen> createState() => _MyPageScreenState();
+}
+
+class _MyPageScreenState extends State<MyPageScreen> {
+  Future<User>? futureUser;
+  @override
+  void initState() {
+    super.initState();
+    futureUser = fetchUser();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBarDetail(context),
-      body: Container(
-        color: Colors.white,
-        padding: EdgeInsets.only(top: 10),
-        child: ListView(
-          children: <Widget>[
-            Container(
-              color: Theme.of(context).hoverColor,
-              padding: EdgeInsets.all(13),
-              child: Column(
-                children: <Widget>[
-                  Row(
-                    children: [
-                      CircleAvatar(
-                        radius: 50,
-                        backgroundImage:
-                            AssetImage('assets/images/profile1.png'),
-                      ),
-                      SizedBox(width: 15),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "최봉남",
-                            style: TextStyle(
-                              fontSize: 35,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(height: 5),
-                          Text(
-                            "서울시 영등포구",
-                            style: TextStyle(
-                              color: Colors.black38,
-                              fontSize: 30,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Spacer(),
-                    ],
-                  ),
-                  SizedBox(height: 20),
-                  Divider(thickness: 3),
-                  SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      _buildIconButton(Icons.receipt_sharp, '방 개설\n목록', context,
-                          LikeListScreen.routeName),
-                      _buildIconButton(Icons.shopping_bag, '방 신청 \n목록', context,
-                          RegisterListScreen.routeName),
-                      _buildIconButton(Icons.favorite, '찜하기\n', context,
-                          LikeListScreen.routeName),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 30),
-            Row(
-              children: [
-                Text(
-                  '보유 포인트',
-                  style: TextStyle(
-                    fontSize: 35,
-                  ),
-                ),
-                Expanded(child: SizedBox()),
-                Text(
-                  '${user.money}원',
-                  style: TextStyle(
-                    fontSize: 35,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 20),
-            Row(
-              children: [
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text(
-                    '회원정보 수정',
-                    style: TextStyle(
-                      fontSize: 35,
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    primary: Theme.of(context).hoverColor,
-                    onPrimary: Colors.black,
-                  ),
-                ),
-                Expanded(child: SizedBox()),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text(
-                    '충전',
-                    style: TextStyle(
-                      fontSize: 35,
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    primary: Theme.of(context).hoverColor,
-                    onPrimary: Colors.black,
-                  ),
-                ),
-              ],
-            )
-
-            // Container(
-            //   color: Theme.of(context).hoverColor,
-            //   child: Column(
-            //     children: <Widget>[
-            //       _buildMenuRow(null, '나의활동'),
-            //       _buildMenuRow(Icons.location_on_outlined, "내 동네 설정"),
-            //       _buildMenuRow(Icons.location_searching_outlined, "동네 인증하기"),
-            //       _buildMenuRow(Icons.bookmark_outline_sharp, "키워드 알림"),
-            //       _buildMenuRow(Icons.apps_rounded, "모아보기"),
-            //       _buildMenuRow(Icons.menu_book, "당근가계부"),
-            //       _buildMenuRow(Icons.display_settings_rounded, "관심 카테고리 설정"),
-            //     ],
-            //   ),
-            // ),
-          ],
+      body: Center(
+        child: FutureBuilder<User>(
+          future: futureUser,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return buildListview(context, snapshot);
+            } else if (snapshot.hasError) {
+              return Text("${snapshot.error}에러!!");
+            }
+            return CircularProgressIndicator();
+          },
         ),
+      ),
+    );
+  }
+
+  Container buildListview(BuildContext context, snapshot) {
+    return Container(
+      color: Colors.white,
+      padding: EdgeInsets.only(top: 10),
+      child: ListView(
+        children: <Widget>[
+          Container(
+            color: Theme.of(context).hoverColor,
+            padding: EdgeInsets.all(13),
+            child: Column(
+              children: <Widget>[
+                Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 50,
+                      backgroundImage: AssetImage('assets/images/profile1.png'),
+                    ),
+                    SizedBox(width: 15),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "최봉남",
+                          style: TextStyle(
+                            fontSize: 35,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 5),
+                        Text(
+                          "서울시 영등포구",
+                          style: TextStyle(
+                            color: Colors.black38,
+                            fontSize: 30,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Spacer(),
+                  ],
+                ),
+                SizedBox(height: 20),
+                Divider(thickness: 3),
+                SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    _buildIconButton(Icons.receipt_sharp, '방 개설\n목록', context,
+                        LikeListScreen.routeName),
+                    _buildIconButton(Icons.shopping_bag, '방 신청 \n목록', context,
+                        RegisterListScreen.routeName),
+                    _buildIconButton(Icons.favorite, '찜하기\n', context,
+                        LikeListScreen.routeName),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 30),
+          Row(
+            children: [
+              Text(
+                '보유 포인트',
+                style: TextStyle(
+                  fontSize: 35,
+                ),
+              ),
+              Expanded(child: SizedBox()),
+              Text(
+                '${snapshot.data!.point.toString()}원',
+                style: TextStyle(
+                  fontSize: 35,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 20),
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {},
+                child: Text(
+                  '회원정보 수정',
+                  style: TextStyle(
+                    fontSize: 35,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  primary: Theme.of(context).hoverColor,
+                  onPrimary: Colors.black,
+                ),
+              ),
+              Expanded(child: SizedBox()),
+              ElevatedButton(
+                onPressed: () {},
+                child: Text(
+                  '충전',
+                  style: TextStyle(
+                    fontSize: 35,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  primary: Theme.of(context).hoverColor,
+                  onPrimary: Colors.black,
+                ),
+              ),
+            ],
+          )
+
+          // Container(
+          //   color: Theme.of(context).hoverColor,
+          //   child: Column(
+          //     children: <Widget>[
+          //       _buildMenuRow(null, '나의활동'),
+          //       _buildMenuRow(Icons.location_on_outlined, "내 동네 설정"),
+          //       _buildMenuRow(Icons.location_searching_outlined, "동네 인증하기"),
+          //       _buildMenuRow(Icons.bookmark_outline_sharp, "키워드 알림"),
+          //       _buildMenuRow(Icons.apps_rounded, "모아보기"),
+          //       _buildMenuRow(Icons.menu_book, "당근가계부"),
+          //       _buildMenuRow(Icons.display_settings_rounded, "관심 카테고리 설정"),
+          //     ],
+          //   ),
+          // ),
+        ],
       ),
     );
   }

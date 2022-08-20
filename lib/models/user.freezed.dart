@@ -20,13 +20,13 @@ User _$UserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$User {
-  String get userId => throw _privateConstructorUsedError;
-  int get money => throw _privateConstructorUsedError;
-  String get userName => throw _privateConstructorUsedError;
-  String get userPhone => throw _privateConstructorUsedError;
-  List<String> get openClassId => throw _privateConstructorUsedError;
-  List<String> get registerClassId => throw _privateConstructorUsedError;
-  List<String> get likeClassId => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  String get nickName => throw _privateConstructorUsedError;
+  String get phoneNumber => throw _privateConstructorUsedError;
+  String get role => throw _privateConstructorUsedError;
+  int get age => throw _privateConstructorUsedError;
+  int get point => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,13 +38,13 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res>;
   $Res call(
-      {String userId,
-      int money,
-      String userName,
-      String userPhone,
-      List<String> openClassId,
-      List<String> registerClassId,
-      List<String> likeClassId});
+      {String id,
+      String name,
+      String nickName,
+      String phoneNumber,
+      String role,
+      int age,
+      int point});
 }
 
 /// @nodoc
@@ -57,43 +57,43 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? userId = freezed,
-    Object? money = freezed,
-    Object? userName = freezed,
-    Object? userPhone = freezed,
-    Object? openClassId = freezed,
-    Object? registerClassId = freezed,
-    Object? likeClassId = freezed,
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? nickName = freezed,
+    Object? phoneNumber = freezed,
+    Object? role = freezed,
+    Object? age = freezed,
+    Object? point = freezed,
   }) {
     return _then(_value.copyWith(
-      userId: userId == freezed
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
-      money: money == freezed
-          ? _value.money
-          : money // ignore: cast_nullable_to_non_nullable
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      nickName: nickName == freezed
+          ? _value.nickName
+          : nickName // ignore: cast_nullable_to_non_nullable
+              as String,
+      phoneNumber: phoneNumber == freezed
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      role: role == freezed
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as String,
+      age: age == freezed
+          ? _value.age
+          : age // ignore: cast_nullable_to_non_nullable
               as int,
-      userName: userName == freezed
-          ? _value.userName
-          : userName // ignore: cast_nullable_to_non_nullable
-              as String,
-      userPhone: userPhone == freezed
-          ? _value.userPhone
-          : userPhone // ignore: cast_nullable_to_non_nullable
-              as String,
-      openClassId: openClassId == freezed
-          ? _value.openClassId
-          : openClassId // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      registerClassId: registerClassId == freezed
-          ? _value.registerClassId
-          : registerClassId // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      likeClassId: likeClassId == freezed
-          ? _value.likeClassId
-          : likeClassId // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+      point: point == freezed
+          ? _value.point
+          : point // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -104,13 +104,13 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       __$$_UserCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String userId,
-      int money,
-      String userName,
-      String userPhone,
-      List<String> openClassId,
-      List<String> registerClassId,
-      List<String> likeClassId});
+      {String id,
+      String name,
+      String nickName,
+      String phoneNumber,
+      String role,
+      int age,
+      int point});
 }
 
 /// @nodoc
@@ -124,43 +124,43 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? userId = freezed,
-    Object? money = freezed,
-    Object? userName = freezed,
-    Object? userPhone = freezed,
-    Object? openClassId = freezed,
-    Object? registerClassId = freezed,
-    Object? likeClassId = freezed,
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? nickName = freezed,
+    Object? phoneNumber = freezed,
+    Object? role = freezed,
+    Object? age = freezed,
+    Object? point = freezed,
   }) {
     return _then(_$_User(
-      userId: userId == freezed
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
-      money: money == freezed
-          ? _value.money
-          : money // ignore: cast_nullable_to_non_nullable
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      nickName: nickName == freezed
+          ? _value.nickName
+          : nickName // ignore: cast_nullable_to_non_nullable
+              as String,
+      phoneNumber: phoneNumber == freezed
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      role: role == freezed
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as String,
+      age: age == freezed
+          ? _value.age
+          : age // ignore: cast_nullable_to_non_nullable
               as int,
-      userName: userName == freezed
-          ? _value.userName
-          : userName // ignore: cast_nullable_to_non_nullable
-              as String,
-      userPhone: userPhone == freezed
-          ? _value.userPhone
-          : userPhone // ignore: cast_nullable_to_non_nullable
-              as String,
-      openClassId: openClassId == freezed
-          ? _value._openClassId
-          : openClassId // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      registerClassId: registerClassId == freezed
-          ? _value._registerClassId
-          : registerClassId // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      likeClassId: likeClassId == freezed
-          ? _value._likeClassId
-          : likeClassId // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+      point: point == freezed
+          ? _value.point
+          : point // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -169,51 +169,34 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_User implements _User {
   _$_User(
-      {required this.userId,
-      required this.money,
-      required this.userName,
-      required this.userPhone,
-      required final List<String> openClassId,
-      required final List<String> registerClassId,
-      required final List<String> likeClassId})
-      : _openClassId = openClassId,
-        _registerClassId = registerClassId,
-        _likeClassId = likeClassId;
+      {required this.id,
+      required this.name,
+      required this.nickName,
+      required this.phoneNumber,
+      required this.role,
+      required this.age,
+      required this.point});
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
 
   @override
-  final String userId;
+  final String id;
   @override
-  final int money;
+  final String name;
   @override
-  final String userName;
+  final String nickName;
   @override
-  final String userPhone;
-  final List<String> _openClassId;
+  final String phoneNumber;
   @override
-  List<String> get openClassId {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_openClassId);
-  }
-
-  final List<String> _registerClassId;
+  final String role;
   @override
-  List<String> get registerClassId {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_registerClassId);
-  }
-
-  final List<String> _likeClassId;
+  final int age;
   @override
-  List<String> get likeClassId {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_likeClassId);
-  }
+  final int point;
 
   @override
   String toString() {
-    return 'User(userId: $userId, money: $money, userName: $userName, userPhone: $userPhone, openClassId: $openClassId, registerClassId: $registerClassId, likeClassId: $likeClassId)';
+    return 'User(id: $id, name: $name, nickName: $nickName, phoneNumber: $phoneNumber, role: $role, age: $age, point: $point)';
   }
 
   @override
@@ -221,29 +204,27 @@ class _$_User implements _User {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_User &&
-            const DeepCollectionEquality().equals(other.userId, userId) &&
-            const DeepCollectionEquality().equals(other.money, money) &&
-            const DeepCollectionEquality().equals(other.userName, userName) &&
-            const DeepCollectionEquality().equals(other.userPhone, userPhone) &&
+            const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other.nickName, nickName) &&
             const DeepCollectionEquality()
-                .equals(other._openClassId, _openClassId) &&
-            const DeepCollectionEquality()
-                .equals(other._registerClassId, _registerClassId) &&
-            const DeepCollectionEquality()
-                .equals(other._likeClassId, _likeClassId));
+                .equals(other.phoneNumber, phoneNumber) &&
+            const DeepCollectionEquality().equals(other.role, role) &&
+            const DeepCollectionEquality().equals(other.age, age) &&
+            const DeepCollectionEquality().equals(other.point, point));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(userId),
-      const DeepCollectionEquality().hash(money),
-      const DeepCollectionEquality().hash(userName),
-      const DeepCollectionEquality().hash(userPhone),
-      const DeepCollectionEquality().hash(_openClassId),
-      const DeepCollectionEquality().hash(_registerClassId),
-      const DeepCollectionEquality().hash(_likeClassId));
+      const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(nickName),
+      const DeepCollectionEquality().hash(phoneNumber),
+      const DeepCollectionEquality().hash(role),
+      const DeepCollectionEquality().hash(age),
+      const DeepCollectionEquality().hash(point));
 
   @JsonKey(ignore: true)
   @override
@@ -260,30 +241,30 @@ class _$_User implements _User {
 
 abstract class _User implements User {
   factory _User(
-      {required final String userId,
-      required final int money,
-      required final String userName,
-      required final String userPhone,
-      required final List<String> openClassId,
-      required final List<String> registerClassId,
-      required final List<String> likeClassId}) = _$_User;
+      {required final String id,
+      required final String name,
+      required final String nickName,
+      required final String phoneNumber,
+      required final String role,
+      required final int age,
+      required final int point}) = _$_User;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 
   @override
-  String get userId;
+  String get id;
   @override
-  int get money;
+  String get name;
   @override
-  String get userName;
+  String get nickName;
   @override
-  String get userPhone;
+  String get phoneNumber;
   @override
-  List<String> get openClassId;
+  String get role;
   @override
-  List<String> get registerClassId;
+  int get age;
   @override
-  List<String> get likeClassId;
+  int get point;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

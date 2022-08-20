@@ -51,14 +51,15 @@ var DUMMY_LECTURE_DETAIL = [
   ),
 ];
 
-var DUMMY_USER = [
-  User(
-    userId: 'u1',
-    money: 10000,
-    userName: '김숙희',
-    userPhone: '010-1234-5678',
-    openClassId: [''],
-    registerClassId: [''],
-    likeClassId: [''],
-  ),
-];
+// var DUMMY_USER = [
+//   User(
+//     userId: '5',
+//     money: 10000,
+//     location: '서울시 영등포구',
+//     userName: '최봉남',
+//     userPhone: '010-1234-5678',
+//     openClassId: [''],
+//     registerClassId: [''],
+//     likeClassId: [''],
+//   ),
+// ];

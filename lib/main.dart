@@ -10,11 +10,7 @@ import 'package:demo_app/screens/my_page/like_list_screen.dart';
 import 'package:demo_app/screens/my_page/my_page_screen.dart';
 import 'package:demo_app/screens/my_page/register_list_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
-
-import 'models/class_test.dart';
-import 'screens/test.dart';
 
 // void main() async {
 //   WidgetsFlutterBinding.ensureInitialized();

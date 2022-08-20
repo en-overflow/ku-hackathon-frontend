@@ -9,7 +9,7 @@ import '../../models/register_list_item.dart';
 import '../../widgets/appbar.dart';
 
 Future<List<RegisterListItem>> fetchRegisterListItem(http.Client client) async {
-  final url = Uri.parse('http://52.79.133.11/api/user/register/3');
+  final url = Uri.parse('http://3.34.130.105:3000/api/user/register/5');
   final response = await client.get(url);
   // final response  = {
   // "body":'{"image":"url"}'
@@ -44,7 +44,7 @@ List<RegisterListItem> parseRegisters(String responseBody) {
 
 class RegisterListScreen extends StatelessWidget {
   static const routeName = '/register-list';
-  @override
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBarDetail(context),
@@ -56,23 +56,36 @@ class RegisterListScreen extends StatelessWidget {
           } else if (snapshot.hasError) {
             return Text("${snapshot.error}에러!!");
           }
-          return CircularProgressIndicator();
+          return Container(
+            width: double.infinity,
+            height: double.infinity,
+            alignment: Alignment.center,
+            child: CircularProgressIndicator(
+              color: Theme.of(context).hoverColor,
+            ),
+          );
         }),
       ),
     );
   }
 }
 
-class buildRegisterList extends StatelessWidget {
+class buildRegisterList extends StatefulWidget {
   final List<RegisterListItem> registers;
   const buildRegisterList({
     Key? key,
     required this.registers,
   }) : super(key: key);
+
+  @override
+  State<buildRegisterList> createState() => _buildRegisterListState();
+}
+
+class _buildRegisterListState extends State<buildRegisterList> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: registers.length,
+      itemCount: widget.registers.length,
       itemBuilder: (context, index) {
         return Card(
           child: Container(
@@ -95,13 +108,13 @@ class buildRegisterList extends StatelessWidget {
                 // ),
                 Expanded(
                   child: Container(
-                    height: 100,
+                    height: 120,
                     padding: const EdgeInsets.only(left: 20, top: 2),
                     alignment: Alignment.centerLeft,
                     child: Column(
                       children: [
                         Text(
-                          registers[index].title,
+                          widget.registers[index].title,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(fontSize: 35),
                         ),
@@ -113,15 +126,63 @@ class buildRegisterList extends StatelessWidget {
                         //     size: 40,
                         //   ),
                         // ),
+                        SizedBox(height: 10),
+                        Row(
+                          children: [
+                            Expanded(child: SizedBox()),
+                            (widget.registers[index].status
+                                        .compareTo("pending") ==
+                                    0)
+                                ? Text(
+                                    "모집중 ",
+                                    style: TextStyle(
+                                      fontSize: 35,
+                                      color: Colors.green,
+                                    ),
+                                  )
+                                : (widget.registers[index].status
+                                            .compareTo("full") ==
+                                        0)
+                                    ? Text(
+                                        "모집완료 ",
+                                        style: TextStyle(
+                                          fontSize: 35,
+                                          color: Colors.amber[800],
+                                        ),
+                                      )
+                                    : Text(
+                                        "종료 ",
+                                        style: TextStyle(
+                                          fontSize: 35,
+                                          color: Colors.red,
+                                        ),
+                                      ),
+                            ElevatedButton(
+                              onPressed: () async {
+                                var data = {
+                                  "lectureId": widget.registers[index].id,
+                                  "studentId": 5
+                                };
+                                var body = json.encode(data);
+                                final url = Uri.parse(
+                                    'http://3.34.130.105:3000/api/lecture/register');
+                                http.Response _res = await http.delete(
+                                  url,
+                                  headers: {"Content-Type": "application/json"},
+                                  body: body,
+                                );
+                                print(_res.statusCode);
+                                print(_res.body);
+                                setState(() {});
+                              },
+                              child: Text("취소"),
+                            ),
+                          ],
+                        )
                       ],
                     ),
                   ),
                 ),
-                (registers[index].status.compareTo("pending") == 0)
-                    ? Text("모집중")
-                    : (registers[index].status.compareTo("full") == 0)
-                        ? Text("모집완료")
-                        : Text("종료")
               ],
             ),
           ),

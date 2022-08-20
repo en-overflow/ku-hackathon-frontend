@@ -30,6 +30,13 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
+  // bool isRegister = false;
+  // void toggleIsRegister() {
+  //   setState(() {
+  //     isRegister = !isRegister;
+  //   });
+  // }
+
   Future<LectureDetail>? futureLectureDetail;
   @override
   void initState() {
@@ -48,18 +55,6 @@ class _DetailScreenState extends State<DetailScreen> {
 
     return Scaffold(
       appBar: appBarDetail(context),
-      // body: FutureBuilder<LectureDetail>(
-      //   future: futureLectureDetail,
-      //   builder: (context, snapshot) {
-      //     if (snapshot.hasData) {
-      //       // return buildBody(context, snapshot);
-      //
-      //     } else if (snapshot.hasError) {
-      //       return Text("${snapshot.error}에러!!");
-      //     }
-      //     return CircularProgressIndicator();
-      //   },
-      // ),
       body: buildBody(context, selectedLecture),
       bottomNavigationBar: _bottomBarWidget(context, selectedLecture),
     );
@@ -180,7 +175,10 @@ Widget contentDetail(BuildContext context, LectureDetail lectureDetail) {
   );
 }
 
-Widget _bottomBarWidget(BuildContext context, LectureDetail lectureDetail) {
+Widget _bottomBarWidget(
+  BuildContext context,
+  LectureDetail lectureDetail,
+) {
   return Container(
     padding: const EdgeInsets.all(10.0),
     decoration: BoxDecoration(
@@ -234,7 +232,10 @@ Widget _bottomBarWidget(BuildContext context, LectureDetail lectureDetail) {
               GestureDetector(
                 onTap: () async {
                   print('tap');
-                  await _registerDialog(context, lectureDetail);
+                  await _registerDialog(
+                    context,
+                    lectureDetail,
+                  );
                 },
                 child: Container(
                   padding:
@@ -244,8 +245,10 @@ Widget _bottomBarWidget(BuildContext context, LectureDetail lectureDetail) {
                     color: Theme.of(context).hoverColor,
                   ),
                   child: Text(
+                    // isRegister == true ? "취소하기" : "신청하기",
                     "신청하기",
                     style: TextStyle(
+                      // color: isRegister == true ? Colors.red : Colors.black,
                       color: Colors.black,
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
@@ -273,50 +276,117 @@ Future<dynamic> _registerDialog(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.0),
         ),
-        title: new Text("강좌 제목 : ${lectureDetail.title}"),
+        title: new Text(
+          "강좌 제목 \n: ${lectureDetail.title}",
+          style: TextStyle(fontSize: 40),
+        ),
         content: SingleChildScrollView(
           child: Column(
             children: [
+              Divider(
+                thickness: 2,
+                color: Theme.of(context).hoverColor,
+              ),
               Row(
                 children: [
-                  Text("나의 보유 포인트 :"),
+                  Text(
+                    "내 지갑 :",
+                    style: TextStyle(fontSize: 30),
+                  ),
                   Expanded(child: SizedBox()),
-                  Text("${lectureDetail.userMoney}원"),
                 ],
               ),
               Row(
                 children: [
-                  Text("- 강좌 가격 :"),
                   Expanded(child: SizedBox()),
-                  Text("${lectureDetail.price}원"),
+                  Text(
+                    "${lectureDetail.userMoney}원",
+                    style: TextStyle(fontSize: 30),
+                  ),
+                ],
+              ),
+              SizedBox(height: 20),
+              Row(
+                children: [
+                  Text(
+                    "강좌 가격 :",
+                    style: TextStyle(fontSize: 30),
+                  ),
+                  Expanded(child: SizedBox()),
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(child: SizedBox()),
+                  Text(
+                    "-   ${lectureDetail.price}원",
+                    style: TextStyle(fontSize: 30),
+                  ),
                 ],
               ),
               Divider(
                 thickness: 2,
-                color: Theme.of(context).canvasColor,
+                color: Theme.of(context).hoverColor,
               ),
+              SizedBox(height: 10),
               Row(
                 children: [
                   Expanded(child: SizedBox()),
-                  Text("${resultMoney}원"),
+                  Text(
+                    "${resultMoney}원",
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ],
               ),
-              Text("결제하시겠습니까?"),
             ],
           ),
         ),
         actions: <Widget>[
-          TextButton(
-            child: new Text("예"),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-          TextButton(
-            child: new Text("아니요"),
-            onPressed: () {
-              Navigator.pop(context);
-            },
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              children: [
+                TextButton(
+                  child: new Text(
+                    "결제",
+                    style: TextStyle(
+                      fontSize: 30,
+                      color: Theme.of(context).primaryColor.withRed(100),
+                    ),
+                  ),
+                  onPressed: () async {
+                    var data = {"lectureId": 7, "studentId": 5};
+                    var body = json.encode(data);
+                    final url = Uri.parse(
+                        'http://3.34.130.105:3000/api/lecture/register');
+                    http.Response _res = await http.post(
+                      url,
+                      headers: {"Content-Type": "application/json"},
+                      body: body,
+                    );
+                    print(_res.statusCode);
+                    print(_res.body);
+                    Navigator.pop(context);
+                  },
+                ),
+                Expanded(child: SizedBox()),
+                TextButton(
+                  child: new Text(
+                    "취소",
+                    style: TextStyle(
+                      fontSize: 30,
+                      color: Colors.red,
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            ),
           ),
         ],
       );

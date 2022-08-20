@@ -7,27 +7,21 @@ part of 'user.dart';
 // **************************************************************************
 
 _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
-      userId: json['userId'] as String,
-      money: json['money'] as int,
-      userName: json['userName'] as String,
-      userPhone: json['userPhone'] as String,
-      openClassId: (json['openClassId'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
-      registerClassId: (json['registerClassId'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
-      likeClassId: (json['likeClassId'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
+      id: json['id'] as String,
+      name: json['name'] as String,
+      nickName: json['nickName'] as String,
+      phoneNumber: json['phoneNumber'] as String,
+      role: json['role'] as String,
+      age: json['age'] as int,
+      point: json['point'] as int,
     );
 
 Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
-      'userId': instance.userId,
-      'money': instance.money,
-      'userName': instance.userName,
-      'userPhone': instance.userPhone,
-      'openClassId': instance.openClassId,
-      'registerClassId': instance.registerClassId,
-      'likeClassId': instance.likeClassId,
+      'id': instance.id,
+      'name': instance.name,
+      'nickName': instance.nickName,
+      'phoneNumber': instance.phoneNumber,
+      'role': instance.role,
+      'age': instance.age,
+      'point': instance.point,
     };
