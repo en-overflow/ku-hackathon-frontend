@@ -5,12 +5,13 @@ import 'package:demo_app/screens/my_page/like_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import '../../providers/lecture_details.dart';
+// import '../../providers/lecture_details.dart';
 import '../../widgets/appbar.dart';
+import 'open_list_screen.dart';
 import 'register_list_screen.dart';
 
 Future<User> fetchUser() async {
-  final url = Uri.parse('https://jsonplaceholder.typicode.com/todos/1');
+  final url = Uri.parse('http://3.34.130.105:3000/api/user/5');
   var response = await http.get(url);
 
   if (response.statusCode == 200) {
@@ -40,7 +41,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarDetail(context),
+      appBar: appBarHome(context),
       body: Center(
         child: FutureBuilder<User>(
           future: futureUser,
@@ -59,8 +60,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
 
   Container buildListview(BuildContext context, snapshot) {
     return Container(
-      color: Colors.white,
-      padding: EdgeInsets.only(top: 10),
+      padding: EdgeInsets.only(top: 20),
       child: ListView(
         children: <Widget>[
           Container(
@@ -105,7 +105,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     _buildIconButton(Icons.receipt_sharp, '방 개설\n목록', context,
-                        LikeListScreen.routeName),
+                        OpenListScreen.routeName),
                     _buildIconButton(Icons.shopping_bag, '방 신청 \n목록', context,
                         RegisterListScreen.routeName),
                     _buildIconButton(Icons.favorite, '찜하기\n', context,
@@ -116,95 +116,76 @@ class _MyPageScreenState extends State<MyPageScreen> {
             ),
           ),
           SizedBox(height: 30),
-          Row(
-            children: [
-              Text(
-                '보유 포인트',
-                style: TextStyle(
-                  fontSize: 35,
+          Padding(
+            padding: EdgeInsets.only(
+              top: 5,
+              bottom: 10,
+              left: 15,
+              right: 15,
+            ),
+            child: Row(
+              children: [
+                Text(
+                  '보유 포인트',
+                  style: TextStyle(
+                    fontSize: 35,
+                  ),
                 ),
-              ),
-              Expanded(child: SizedBox()),
-              Text(
-                '${snapshot.data!.point.toString()}원',
-                style: TextStyle(
-                  fontSize: 35,
+                Expanded(child: SizedBox()),
+                Text(
+                  "${snapshot.data!.point} 원",
+                  // "원",
+                  style: TextStyle(
+                    fontSize: 35,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           SizedBox(height: 20),
-          Row(
-            children: [
-              ElevatedButton(
-                onPressed: () {},
-                child: Text(
-                  '회원정보 수정',
-                  style: TextStyle(
-                    fontSize: 35,
+          Padding(
+            padding: EdgeInsets.only(
+              top: 5,
+              bottom: 10,
+              left: 15,
+              right: 15,
+            ),
+            child: Row(
+              children: [
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text(
+                    '회원정보 수정',
+                    style: TextStyle(
+                      fontSize: 35,
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    primary: Theme.of(context).hoverColor,
+                    onPrimary: Colors.black,
                   ),
                 ),
-                style: ElevatedButton.styleFrom(
-                  primary: Theme.of(context).hoverColor,
-                  onPrimary: Colors.black,
-                ),
-              ),
-              Expanded(child: SizedBox()),
-              ElevatedButton(
-                onPressed: () {},
-                child: Text(
-                  '충전',
-                  style: TextStyle(
-                    fontSize: 35,
+                Expanded(child: SizedBox()),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text(
+                    '충전',
+                    style: TextStyle(
+                      fontSize: 35,
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    primary: Theme.of(context).hoverColor,
+                    onPrimary: Colors.black,
                   ),
                 ),
-                style: ElevatedButton.styleFrom(
-                  primary: Theme.of(context).hoverColor,
-                  onPrimary: Colors.black,
-                ),
-              ),
-            ],
+              ],
+            ),
           )
-
-          // Container(
-          //   color: Theme.of(context).hoverColor,
-          //   child: Column(
-          //     children: <Widget>[
-          //       _buildMenuRow(null, '나의활동'),
-          //       _buildMenuRow(Icons.location_on_outlined, "내 동네 설정"),
-          //       _buildMenuRow(Icons.location_searching_outlined, "동네 인증하기"),
-          //       _buildMenuRow(Icons.bookmark_outline_sharp, "키워드 알림"),
-          //       _buildMenuRow(Icons.apps_rounded, "모아보기"),
-          //       _buildMenuRow(Icons.menu_book, "당근가계부"),
-          //       _buildMenuRow(Icons.display_settings_rounded, "관심 카테고리 설정"),
-          //     ],
-          //   ),
-          // ),
         ],
       ),
     );
   }
-}
-
-Widget _buildMenuRow(IconData? icon, String text) {
-  return Container(
-    height: 45,
-    padding: EdgeInsets.all(10),
-    child: Row(
-      children: [
-        if (icon != null) Icon(icon),
-        SizedBox(width: 10),
-        icon != null
-            ? Text(text)
-            : Text(
-                text,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-      ],
-    ),
-  );
 }
 
 Widget _buildIconButton(

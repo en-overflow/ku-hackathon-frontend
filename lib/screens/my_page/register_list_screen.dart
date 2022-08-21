@@ -47,7 +47,7 @@ class RegisterListScreen extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarDetail(context),
+      appBar: appBarHome(context),
       body: FutureBuilder<List<RegisterListItem>>(
         future: fetchRegisterListItem(http.Client()),
         builder: ((context, snapshot) {
@@ -173,7 +173,11 @@ class _buildRegisterListState extends State<buildRegisterList> {
                                 );
                                 print(_res.statusCode);
                                 print(_res.body);
-                                setState(() {});
+                                Navigator.of(context).pop();
+                                Navigator.of(context)
+                                    .pushNamed(RegisterListScreen.routeName);
+
+                                // setState(() {});
                               },
                               child: Text("취소"),
                             ),

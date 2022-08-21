@@ -16,7 +16,7 @@ class User with _$User {
   //   required List<String> likeClassId,
   // }) = _User;
   factory User({
-    required String id,
+    required int id,
     required String name,
     required String nickName,
     required String phoneNumber,

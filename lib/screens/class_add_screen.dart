@@ -14,7 +14,7 @@ class ClassAddScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarDetail(context),
+      appBar: appBarHome(context),
       body: Container(
         padding: EdgeInsets.only(
           top: 5,

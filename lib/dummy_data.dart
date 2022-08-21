@@ -25,7 +25,7 @@ var DUMMY_LECTURE_DETAIL = [
     instructorName: '김숙희',
     instructorPhone: '010-1234-5678',
     userId: 'u1',
-    userMoney: '100000',
+    userMoney: '160000',
   ),
   LectureDetail(
     classId: 'c2',
@@ -37,7 +37,7 @@ var DUMMY_LECTURE_DETAIL = [
     description: '클라리넷으로 황혼 부르고 싶으신 분',
     location: '영등포구 복지관 3층 강당',
     level: '초급',
-    price: '15000',
+    price: '20000',
     like: false,
     totalCount: 6,
     category: '악기',
@@ -46,8 +46,8 @@ var DUMMY_LECTURE_DETAIL = [
     instructorPhoto: 'assets/images/profile1.png',
     instructorName: '최일남',
     instructorPhone: '010-2222-3333',
-    userId: 'u2',
-    userMoney: '40000',
+    userId: 'u1',
+    userMoney: '160000',
   ),
 ];
 

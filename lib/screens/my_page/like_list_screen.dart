@@ -21,7 +21,7 @@ class _LikeListScreenState extends State<LikeListScreen> {
         .where((lectureDetail) => lectureDetail.like == true)
         .toList();
     return Scaffold(
-      appBar: appBarDetail(context),
+      appBar: appBarHome(context),
       body: ListView.builder(
         itemCount: likeLectures.length,
         itemBuilder: (context, index) {
@@ -56,12 +56,26 @@ class _LikeListScreenState extends State<LikeListScreen> {
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(fontSize: 35),
                           ),
+                          SizedBox(height: 10),
                           Container(
-                            child: Icon(
-                              likeLectures[index].like
-                                  ? Icons.favorite
-                                  : Icons.favorite_border,
-                              size: 40,
+                            child: Row(
+                              children: [
+                                Expanded(child: SizedBox()),
+                                GestureDetector(
+                                  onTap: () {
+                                    context
+                                        .read<LectureDetails>()
+                                        .toggleLecture(
+                                            likeLectures[index].classId);
+                                  },
+                                  child: Icon(
+                                    likeLectures[index].like
+                                        ? Icons.favorite
+                                        : Icons.favorite_border,
+                                    size: 40,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],

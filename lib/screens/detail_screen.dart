@@ -9,18 +9,18 @@ import 'package:http/http.dart' as http;
 
 import '../widgets/appbar.dart';
 
-Future<LectureDetail> fetchClass() async {
-  final url = Uri.parse('https://jsonplaceholder.typicode.com/todos/1');
-  var response = await http.get(url);
+// Future<LectureDetail> fetchClass() async {
+//   final url = Uri.parse('https://jsonplaceholder.typicode.com/todos/1');
+//   var response = await http.get(url);
 
-  if (response.statusCode == 200) {
-    //ok
-    print(json.decode(response.body));
-    return LectureDetail.fromJson(json.decode(response.body));
-  } else {
-    throw Exception('실패ㅠㅠ');
-  }
-}
+//   if (response.statusCode == 200) {
+//     //ok
+//     print(json.decode(response.body));
+//     return LectureDetail.fromJson(json.decode(response.body));
+//   } else {
+//     throw Exception('실패ㅠㅠ');
+//   }
+// }
 
 class DetailScreen extends StatefulWidget {
   static const routeName = '/detail';
@@ -37,12 +37,12 @@ class _DetailScreenState extends State<DetailScreen> {
   //   });
   // }
 
-  Future<LectureDetail>? futureLectureDetail;
-  @override
-  void initState() {
-    super.initState();
-    futureLectureDetail = fetchClass();
-  }
+  // Future<LectureDetail>? futureLectureDetail;
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   futureLectureDetail = fetchClass();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,7 @@ class _DetailScreenState extends State<DetailScreen> {
         .firstWhere((lectureDetail) => lectureDetail.classId == classId);
 
     return Scaffold(
-      appBar: appBarDetail(context),
+      appBar: appBarHome(context),
       body: buildBody(context, selectedLecture),
       bottomNavigationBar: _bottomBarWidget(context, selectedLecture),
     );
@@ -67,7 +67,7 @@ Container buildBody(BuildContext context, LectureDetail selectedLecture) {
     width: double.infinity,
     color: Colors.white,
     padding: EdgeInsets.only(
-      top: 5,
+      top: 20,
       bottom: 10,
     ),
     child: SingleChildScrollView(
@@ -369,7 +369,8 @@ Future<dynamic> _registerDialog(
                     );
                     print(_res.statusCode);
                     print(_res.body);
-                    Navigator.pop(context);
+                    Navigator.of(context)
+                        .popUntil(ModalRoute.withName('/class-list'));
                   },
                 ),
                 Expanded(child: SizedBox()),

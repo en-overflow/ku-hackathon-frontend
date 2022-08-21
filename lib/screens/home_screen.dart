@@ -15,6 +15,8 @@ class HomeScreen extends StatelessWidget {
         appBar: appBarHome(context),
         body: Container(
           height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          padding: EdgeInsets.symmetric(horizontal: 10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -35,7 +37,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 30),
+              SizedBox(height: 40),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -80,18 +82,16 @@ Widget _buildButton(
           Text(
             title,
             style: TextStyle(
-              color: Theme.of(context).focusColor,
-              fontSize: 30,
-              fontFamily: 'DalseoDarling',
+              // color: Theme.of(context).focusColor,
+              color: Color(0xff684f32),
+              fontSize: 45,
+              fontFamily: 'Dongle',
             ),
-          ),
-          SizedBox(
-            height: 10,
           ),
           Icon(
             icon,
-            size: 30,
-            color: Theme.of(context).focusColor,
+            size: 40,
+            color: Color(0xff684f32),
           ),
         ],
       ),

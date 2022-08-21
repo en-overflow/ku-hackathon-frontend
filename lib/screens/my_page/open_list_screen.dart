@@ -43,11 +43,11 @@ List<OpenListItem> parseRegisters(String responseBody) {
 // }
 
 class OpenListScreen extends StatelessWidget {
-  static const routeName = '/register-list';
+  static const routeName = '/open-list';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarDetail(context),
+      appBar: appBarHome(context),
       body: FutureBuilder<List<OpenListItem>>(
         future: fetchRegisterListItem(http.Client()),
         builder: ((context, snapshot) {
@@ -70,12 +70,18 @@ class OpenListScreen extends StatelessWidget {
   }
 }
 
-class buildRegisterList extends StatelessWidget {
+class buildRegisterList extends StatefulWidget {
   final List<OpenListItem> registers;
   const buildRegisterList({
     Key? key,
     required this.registers,
   }) : super(key: key);
+
+  @override
+  State<buildRegisterList> createState() => _buildRegisterListState();
+}
+
+class _buildRegisterListState extends State<buildRegisterList> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -108,7 +114,7 @@ class buildRegisterList extends StatelessWidget {
                     child: Column(
                       children: [
                         Text(
-                          registers[index].title,
+                          widget.registers[index].title,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(fontSize: 35),
                         ),
@@ -151,17 +157,19 @@ class buildRegisterList extends StatelessWidget {
                                           color: Colors.red,
                                         ),
                                       ),
-                
+                          ],
+                        ),
                       ],
                     ),
                   ),
-                // ),
-                // TODO : 복붙하면 됨
-                // (registers[index].status.compareTo("pending") == 0)
-                //     ? Text("모집중")
-                //     : (registers[index].status.compareTo("full") == 0)
-                //         ? Text("모집완료")
-                //         : Text("종료")
+                  // ),
+                  // TODO : 복붙하면 됨
+                  // (registers[index].status.compareTo("pending") == 0)
+                  //     ? Text("모집중")
+                  //     : (registers[index].status.compareTo("full") == 0)
+                  //         ? Text("모집완료")
+                  //         : Text("종료")
+                ),
               ],
             ),
           ),
